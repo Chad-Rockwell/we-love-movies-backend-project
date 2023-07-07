@@ -41,7 +41,6 @@ async function update(req, res, next) {
   const { reviewId } = req.params;
   const criticId = res.locals.review.critic_id;
   const critic = await reviewsService.grabCritic(criticId); // Calls the reviewsService to retrieve the critic for the review
-  console.log(critic);
   const updatedReview = {
     ...res.locals.review,
     ...req.body.data,
@@ -49,7 +48,6 @@ async function update(req, res, next) {
   };
   const data = await reviewsService.update(updatedReview); // Calls the reviewsService to update the review with the provided data
   data.critic = critic;
-  console.log("this is the data with critic", data);
   res.json({ data }); // Sends the updated review data, including the critic, as a JSON response
 }
 
